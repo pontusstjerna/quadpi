@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=pi
 WorkingDirectory=/home/pi/mavproxy
-ExecStart=/home/pi/quadpi/.venv/bin/mavproxy.py --daemon --non-interactive --continue --master=/dev/ttyAMA0 --baud=115200 --aircraft AutoSparky --out=tcpin:0.0.0.0:5760
+ExecStart=/home/pi/quadpi/.venv/bin/mavproxy.py --daemon --non-interactive --continue --master=/dev/ttyAMA0 --baud=115200 --aircraft AutoSparky --out=tcpin:0.0.0.0:5760 --out=tcpin:0.0.0.0:5761
 Restart=always
 
 [Install]
