@@ -1,0 +1,4 @@
+.venv
+AutoSparky
+*.tlog
+*.raw
