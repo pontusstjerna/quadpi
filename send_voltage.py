@@ -5,8 +5,7 @@ import busio
 from adafruit_ads1x15.ads1115 import ADS1115, P0
 from adafruit_ads1x15.analog_in import AnalogIn
 
-master = mavutil.mavlink_connection("/dev/ttyAMA0", source_system=1, source_component=1)
-
+master = mavutil.mavlink_connection("tcp:127.0.0.1:5761")
 
 # Setup I2C and ADC
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -36,10 +35,10 @@ while True:
     voltage_mv = int(battery_voltage * 1000)
     master.mav.battery_status_send(
         id=1,
-        battery_function=1, # all
+        battery_function=0, # all
         type=3, # lipo
         temperature=0,
-        voltages=[voltage_mv, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        voltages=[voltage_mv] + [0] * 9,
         current_battery=-1,
         current_consumed=-1,
         energy_consumed=-1,
