@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Wait for WiFi to try
+echo "Trying WiFi connection for 30 sec then eventually starting access point..."
 sleep 30
 
 # Did we get IP from configured WiFi?
