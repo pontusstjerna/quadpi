@@ -1,15 +1,17 @@
 #!/bin/bash
 
 # Wait for WiFi to try
-sleep 40
+sleep 30
 
 # Did we get IP from configured WiFi?
-if ! /sbin/ifconfig wlan0 | grep -q "inet "; then
-    echo "No WiFi found - starting access point!"
-    systemctl start hostapd
-    systemctl start dnsmasq
+if ! nmcli -t -f WIFI g | grep -q 'enabled'; then
+    echo "WiFi disabled!"
+    exit 1
+fi
+
+if nmcli -t -f STATE g | grep -q 'connected'; then
+    echo "WiFi connected - not starting access point!"
 else
-    echo "WiFi joined - not starting access point!"
-    systemctl stop hostapd
-    systemctl stop dnsmasq
+    echo "WiFi not found - starting access point (hotspot)"
+    nmcli device wifi hotspod ssid QuadPi password ostronkoala
 fi
