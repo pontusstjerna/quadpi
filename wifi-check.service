@@ -1,0 +1,11 @@
+[Unit]
+Description=Controls Wifi and starts access point if necessary
+After=network.target
+
+[Service]
+ExecStart=/home/pi/quadpi/wifi-check.sh
+Type=oneshot
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
